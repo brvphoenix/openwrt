@@ -314,6 +314,9 @@ tplink_board_detect() {
 	"350000"*)
 		model="TP-Link TL-WDR3500"
 		;;
+	"204100"*)
+		model="TP-Link TL-WR2041N"
+		;;
 	"360000"*)
 		model="TP-Link TL-WDR3600"
 		;;
@@ -1270,6 +1273,9 @@ ar71xx_board_detect() {
 		;;
 	*"TL-WDR3500")
 		name="tl-wdr3500"
+		;;
+	*"TL-WR2041N v1")
+		name="tl-wr2041n-v1"
 		;;
 	*"TL-WDR3600/4300/4310")
 		name="tl-wdr4300"

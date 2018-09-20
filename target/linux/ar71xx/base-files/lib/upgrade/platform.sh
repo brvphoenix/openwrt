@@ -456,6 +456,7 @@ platform_check_image() {
 	tl-wa901nd-v5|\
 	tl-wdr3320-v2|\
 	tl-wdr3500|\
+	tl-wr2041n-v1|\
 	tl-wdr4300|\
 	tl-wdr4900-v2|\
 	tl-wdr6500-v2|\
