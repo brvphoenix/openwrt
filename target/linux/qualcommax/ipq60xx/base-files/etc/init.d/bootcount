@@ -4,6 +4,9 @@ START=99
 
 boot() {
 	case $(board_name) in
+	edgecore,eap101)
+		fw_setenv bootcount 0
+		;;
 	linksys,mr7350|\
 	linksys,mr7500)
 		mtd resetbc s_env || true
