@@ -296,7 +296,7 @@
 			#size-cells = <1>;
 
 			partition@0 {
-				label = "rootfs1";
+				label = "rootfs";
 				reg = <0x0000000 0x3400000>;
 			};
 
@@ -307,7 +307,7 @@
 			};
 
 			partition@3c00000 {
-				label = "rootfs2";
+				label = "rootfs_1";
 				reg = <0x3c00000 0x3400000>;
 			};
 

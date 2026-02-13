@@ -208,9 +208,9 @@ platform_do_upgrade() {
 	edgecore,eap102)
 		active="$(fw_printenv -n active)"
 		if [ "$active" -eq "1" ]; then
-			CI_UBIPART="rootfs2"
+			CI_UBIPART="rootfs_1"
 		else
-			CI_UBIPART="rootfs1"
+			CI_UBIPART="rootfs"
 		fi
 		# force altbootcmd which handles partition change in u-boot
 		fw_setenv bootcount 3
