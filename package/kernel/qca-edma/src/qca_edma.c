@@ -971,6 +971,22 @@ static int edma_irq_init(struct edma *edma)
 	return 0;
 }
 
+static int edma_page_pool_create(struct edma *edma)
+{
+	struct page_pool_params pp = {
+		.pool_size = EDMA_RX_RING_SIZE,
+		.nid       = NUMA_NO_NODE,
+		.dev       = &edma->pdev->dev,
+		.dma_dir   = DMA_FROM_DEVICE,
+		.offset    = NET_SKB_PAD,
+		.max_len   = EDMA_RX_BUFFER_SIZE,
+		.flags     = PP_FLAG_DMA_MAP | PP_FLAG_DMA_SYNC_DEV,
+	};
+
+	edma->page_pool = page_pool_create(&pp);
+	return PTR_ERR_OR_ZERO(edma->page_pool);
+}
+
 static int edma_probe(struct platform_device *pdev)
 {
 	struct clk_bulk_data *clks;
@@ -1001,22 +1017,9 @@ static int edma_probe(struct platform_device *pdev)
 	if (ret)
 		return ret;
 
-	{
-		struct page_pool_params pp = {
-			.order     = 0,
-			.pool_size = EDMA_RX_RING_SIZE,
-			.nid       = NUMA_NO_NODE,
-			.dev       = dev,
-			.dma_dir   = DMA_FROM_DEVICE,
-			.offset    = NET_SKB_PAD,
-			.max_len   = EDMA_RX_BUFFER_SIZE,
-			.flags     = PP_FLAG_DMA_MAP | PP_FLAG_DMA_SYNC_DEV,
-		};
-
-		edma->page_pool = page_pool_create(&pp);
-		if (IS_ERR(edma->page_pool))
-			return PTR_ERR(edma->page_pool);
-	}
+	ret = edma_page_pool_create(edma);
+	if (ret)
+		return ret;
 
 	edma->rst = devm_reset_control_get(dev, EDMA_HW_RESET_ID);
 	if (IS_ERR(edma->rst)) {
