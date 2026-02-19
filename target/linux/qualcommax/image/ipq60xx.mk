@@ -75,7 +75,7 @@ endef
 define Device/glinet_gl-ax1800
 	$(call Device/glinet_gl-common)
 	DEVICE_MODEL := GL-AX1800
-	DEVICE_PACKAGES := ipq-wifi-glinet_gl-ax1800
+	DEVICE_PACKAGES := ipq-wifi-glinet_gl-ax1800 -kmod-qca-nss-dp kmod-qca-ppe
 	SUPPORTED_DEVICES += glinet,ax1800
 endef
 TARGET_DEVICES += glinet_gl-ax1800
